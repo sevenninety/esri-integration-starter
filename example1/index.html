@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+		<title>Esri Integration Example 1</title>
+		
+		<style>
+			html, body, #esri-map {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				overflow: hidden;
+			}
+		</style>	
+		
+		<!-- ESRI CSS -->			
+   		<link rel="stylesheet" href="//js.arcgis.com/3.19/esri/themes/calcite/dijit/calcite.css">
+   		<link rel="stylesheet" href="//js.arcgis.com/3.19/esri/themes/calcite/esri/esri.css">
+
+		<script src="//js.arcgis.com/3.19/"></script>
+		
+		<script>
+		    var config = {
+	    		webmapId: "ef9c7fbda731474d98647bebb4b33c20",
+				basemap: "gray"
+	    	};
+		
+			require(["esri/arcgis/utils", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol", "esri/graphic", "dojo/domReady!"], function(arcgisUtils, Circle, SimpleFillSymbol, Graphic) {
+				var map = null,
+					symbol = new SimpleFillSymbol().setColor(null).outline.setColor("blue"),
+					options = {
+            			ignorePopups: true,
+            			mapOptions: {
+            				basemap: config.basemap
+            			} 
+            		};
+			
+				// Create the map
+				arcgisUtils.createMap(config.webmapId, "esri-map", options).then(function(response) {
+					map = response.map;					
+					map.on("click", drawCircle);
+				});
+						      
+				function drawCircle(e) {
+					var circle, radius;
+					
+					// Clear existing grahics
+			    	map.graphics.clear();
+			    	
+			    	radius = map.extent.getWidth() / 10;
+	          		circle = new Circle({
+	            		center: e.mapPoint,
+	            		radius: radius
+	          		});
+	          		
+	          		map.graphics.add(new Graphic(circle, symbol));
+				}
+			});
+		</script>
+	</head>
+
+	<body class="calcite">				
+		<div id="esri-map"></div>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+		<title>Esri Integration Example 2</title>
+		
+		<style>
+			html, body, #esri-map {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				overflow: hidden;
+			}
+		</style>	
+		
+		<!-- ESRI CSS -->			
+   		<link rel="stylesheet" href="//js.arcgis.com/3.19/esri/themes/calcite/dijit/calcite.css">
+   		<link rel="stylesheet" href="//js.arcgis.com/3.19/esri/themes/calcite/esri/esri.css">
+   		
+   		<script type="text/javascript">
+			var dojoConfig = {
+				parseOnLoad: true,
+				packages : [{
+					name : "app",
+					location : location.pathname.replace(/\/[^/]+$/, "") + "/app"
+				}]
+			};
+		</script>
+
+		<script src="//js.arcgis.com/3.19/"></script>
+		
+		<script>
+			require(["app/Map", "dojo/domReady!"], function(Map) {
+				var map = new Map({}, "esri-map");
+			});
+		</script>
+	</head>
+
+	<body class="calcite">				
+		<div id="esri-map"></div>
+	</body>
+</html>
