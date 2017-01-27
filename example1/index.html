@@ -15,6 +15,14 @@
 			body {
 				overflow: hidden;
 			}
+			#extent-btn {
+				position: absolute;
+				top: 15px;
+				left: 65px;
+				z-index: 100;
+				width: 100px;
+				height: 32px;
+			}
 		</style>	
 		
 		<!-- ESRI CSS -->			
@@ -24,19 +32,15 @@
 		<script src="//js.arcgis.com/3.19/"></script>
 		
 		<script>
-		    var config = {
-	    		webmapId: "ef9c7fbda731474d98647bebb4b33c20",
-				basemap: "gray"
+		    var map,
+		    	config = {
+	    		webmapId: "f2e9b762544945f390ca4ac3671cfa72"
 	    	};
 		
 			require(["esri/arcgis/utils", "esri/geometry/Circle", "esri/symbols/SimpleFillSymbol", "esri/graphic", "dojo/domReady!"], function(arcgisUtils, Circle, SimpleFillSymbol, Graphic) {
-				var map = null,
-					symbol = new SimpleFillSymbol().setColor(null).outline.setColor("blue"),
+				var symbol = new SimpleFillSymbol().setColor(null).outline.setColor("blue"),
 					options = {
-            			ignorePopups: true,
-            			mapOptions: {
-            				basemap: config.basemap
-            			} 
+            			ignorePopups: true
             		};
 			
 				// Create the map
@@ -59,11 +63,16 @@
 	          		
 	          		map.graphics.add(new Graphic(circle, symbol));
 				}
-			});
+			});			
+							
+			function showExtent() {
+				alert (map.extent.xmin + " " + map.extent.ymin + map.extent.xmax + " " + map.extent.ymax);
+			}
 		</script>
 	</head>
 
-	<body class="calcite">				
+	<body class="calcite">	
+		<button type="button" id="extent-btn" onclick="showExtent()">Show Extent</button>				
 		<div id="esri-map"></div>
 	</body>
 </html>
