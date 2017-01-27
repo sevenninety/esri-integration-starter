@@ -42,10 +42,7 @@ define([
              */
             init: function() {
             	var options = {
-            		ignorePopups: true,
-            		mapOptions: {
-            			basemap: config.basemap
-            		}            		
+            		ignorePopups: true          		
             	};
             	
 				// Create the map
@@ -75,6 +72,11 @@ define([
           		});
           		
           		map.graphics.add(new Graphic(circle, this.symbol));
+			},
+			
+			showExtent: function() {
+				var map = this.map;
+				alert (map.extent.xmin + " " + map.extent.ymin + map.extent.xmax + " " + map.extent.ymax);
 			}
         });
         

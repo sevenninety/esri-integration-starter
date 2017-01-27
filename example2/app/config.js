@@ -1,4 +1,3 @@
 define({
-	webmapId: "ef9c7fbda731474d98647bebb4b33c20",
-	basemap: "gray"
+	webmapId: "f2e9b762544945f390ca4ac3671cfa72"
 });
