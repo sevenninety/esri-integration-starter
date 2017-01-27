@@ -15,6 +15,14 @@
 			body {
 				overflow: hidden;
 			}
+			#extent-btn {
+				position: absolute;
+				top: 15px;
+				left: 65px;
+				z-index: 100;
+				width: 100px;
+				height: 32px;
+			}
 		</style>	
 		
 		<!-- ESRI CSS -->			
@@ -34,13 +42,21 @@
 		<script src="//js.arcgis.com/3.19/"></script>
 		
 		<script>
-			require(["app/Map", "dojo/domReady!"], function(Map) {
+			require(["app/Map", "dojo/dom", "dojo/on", "dojo/domReady!"], function(Map, dom, on) {
 				var map = new Map({}, "esri-map");
+				
+				map.on("load", function() {
+					on(dom.byId("extent-btn"), "click", function(evt) {
+						evt.preventDefault();
+						map.showExtent();
+					});
+				});
 			});
 		</script>
 	</head>
 
-	<body class="calcite">				
+	<body class="calcite">	
+		<button type="button" id="extent-btn">Show Extent</button>			
 		<div id="esri-map"></div>
 	</body>
 </html>
